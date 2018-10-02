@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'facture',
     'facturier',
 ]
 
@@ -77,7 +78,7 @@ WSGI_APPLICATION = 'facturier.wsgi.application'
 DATABASES = {
   'default': {
       'ENGINE': 'django.contrib.gis.db.backends.postgis',
-      'NAME': 'facture',
+      'NAME': 'facturier',
       'USER': 'facturier',
       'PASSWORD': password,
   }
