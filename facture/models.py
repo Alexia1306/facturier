@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -26,16 +27,19 @@ class Produit(models.Model):
     class Meta:
         ordering = ('name', 'description', 'price')
 
-class Facture(models.Model):
+class Devis(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    facture = models.BooleanField(default=False)
+    class Meta:
+        verbose_name_plural="Devis"
 
     def __str__(self):
-        return "%s %s %s" % (self.id_Client, self.id_Produit, self.price)
+        return "%s %s %s" % (self.client, self.produit)
 
 class Ligne(models.Model):
     quantity = models.IntegerField()
     produit = models.ForeignKey(Produit, null=True, blank=True)
-    facture = models.ForeignKey(Facture, null=True, blank=True)
+    facture = models.ForeignKey(Devis, null=True, blank=True)
 
     def __unicode__(self):
-        return self.label
+                return self.label
