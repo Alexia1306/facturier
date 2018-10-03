@@ -4,7 +4,8 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 
 # Create your views here.
-from django.contrib.auth.models import User, Client, Produit, Devis, Ligne
+from django.contrib.auth.models import User
+from django.views.generic import DetailView
 
 class UserDetailView(DetailView):
     model = User
@@ -13,8 +14,8 @@ class UserDetailView(DetailView):
 
 class ClientDetailView(DetailView):
     model = Client
-    slug_url_kwarg = 'username'
-    slug_field = 'username'
+    slug_url_kwarg = 'first_name'
+    slug_field = 'first_name'
 
 class ProduitDetailView(DetailView):
     model = Produit

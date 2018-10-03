@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-
+from facture.views import UserDetailView, ClientDetailView, ProduitDetailView, DevisDetailView, LigneDetailView
+from django.contrib.auth import views as auth_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-]
+    url(r'^login/$', auth_views.LoginView.as_view()),
+    url(r'^logout/$', auth_views.LogoutView.as_view(next_page='/')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

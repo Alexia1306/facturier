@@ -11,6 +11,8 @@ class Client(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=50)
     address = models.TextField()
+    zipcode = models.IntegerField()
+    city = models.CharField(max_length=80)
 
     def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)
