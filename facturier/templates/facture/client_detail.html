@@ -1,0 +1,12 @@
+{% extends 'facture/index.html'%}
+{% load static %}
+{% block content %}
+<div class="card w-50">
+  <div class="card-body">
+    <h5 class="card-title">{{ client.first_name }} {{client.last_name}}</h5>
+    <p class="card-text">{{ client.address }}</p>
+    <p class="card-text">{{ client.zipcode }} {{ client.city }}</p>
+    <a href="#" class="btn btn-primary">Button</a>
+  </div>
+</div>
+{% endblock %}

@@ -2,11 +2,19 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import User
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-class UserAdmin(BaseUserAdmin):
-    model = User
+from .models import Client, Produit, Ligne, Devis
 
-admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
+# Register your models here.
+
+
+admin.site.register(Client)
+
+
+admin.site.register(Produit)
+
+
+admin.site.register(Ligne)
+
+
+admin.site.register(Devis)

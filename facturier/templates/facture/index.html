@@ -1,3 +1,4 @@
+{% load static  %}
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
     <head>
@@ -5,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatble" content="ie=edge">
         <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     <title>Facturier</title>
     </head>
@@ -22,6 +24,8 @@
         </li>
     </ul>
 </nav>
+{% block content %}{% endblock  %}
     </body>
     <script src="{% static 'bootstrap/dist/js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
 </html>

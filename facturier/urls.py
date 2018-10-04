@@ -15,10 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from facture.views import UserDetailView, ClientDetailView, ProduitDetailView, DevisDetailView, LigneDetailView
+from facture.views import IndexView, ClientDetailView, ClientUpdateView, ClientCreateView, ClientDeleteView
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', auth_views.LoginView.as_view()),
     url(r'^logout/$', auth_views.LogoutView.as_view(next_page='/')),
+    url(r'^client/(?P<first_name>[-\w]+)/$', ClientDetailView.as_view(), name='client'),
+    url(r'^update/(?P<first_name>[-\w]+)/$', ClientUpdateView.as_view(), name='clientupdate'),
+    url(r'^create/$', ClientCreateView.as_view(), name='clientcreate'),
+    url(r'^delete/(?P<slug>[-\w]+)/$', ClientDeleteView.as_view(), name='clientdelete'),
+    url(r'^$', IndexView.as_view(), name='index'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

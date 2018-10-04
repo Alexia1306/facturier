@@ -13,6 +13,7 @@ class Client(models.Model):
     address = models.TextField()
     zipcode = models.IntegerField()
     city = models.CharField(max_length=80)
+    slug = models.SlugField(max_length=100)
 
     def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)
@@ -44,4 +45,4 @@ class Ligne(models.Model):
     facture = models.ForeignKey(Devis, null=True, blank=True)
 
     def __unicode__(self):
-                return self.label
+        return self.label
