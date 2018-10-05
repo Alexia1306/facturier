@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView
 from .models import Client, Produit, Devis, Ligne
@@ -19,21 +20,22 @@ class ClientDeleteView(DeleteView):
 
 class ClientDetailView(DetailView):
     model = Client
-    slug_url_kwarg = 'first_name'
-    slug_field = 'first_name'
 
 class ClientUpdateView(UpdateView):
     model = Client
-    slug_url_kwarg = 'first_name'
-    slug_field = 'first_name'
     fields = ('first_name', 'last_name', 'address', 'zipcode', 'city')
     template_name = 'facture/client_update.html'
 
+    def get_success_url(self):
+        return reverse('client', args=[self.object.slug])
 
 class ClientCreateView(CreateView):
     model = Client
-    fields =  ('first_name', 'last_name', 'address', 'zipcode', 'city')
+    fields =  ('first_name', 'last_name', 'address', 'zipcode', 'city', 'slug')
     template_name = 'facture/client_create.html'
+
+    def get_success_url(self):
+        return reverse('client', args=[self.object.slug])
 
 class UserDetailView(DetailView):
     model = User
