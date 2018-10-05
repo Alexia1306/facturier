@@ -8,8 +8,6 @@ from .models import Client, Produit, Ligne, Devis
 # Register your models here.
 
 
-admin.site.register(Client)
-
 
 admin.site.register(Produit)
 
@@ -18,3 +16,8 @@ admin.site.register(Ligne)
 
 
 admin.site.register(Devis)
+
+class ClientAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'address', 'city', 'zipcode')
+
+admin.site.register(Client, ClientAdmin)
