@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from facture.views import IndexView, ClientDetailView, ClientUpdateView, ClientCreateView, ClientDeleteView
+from facture.views import IndexView, ClientDetailView, ClientUpdateView, ClientCreateView, ClientDeleteView, ClientListView
+from facture.views import ProduitCreateView, ProduitDetailView, ProduitUpdateView, ProduitDeleteView, ProduitListView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -23,10 +24,21 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', auth_views.LoginView.as_view()),
     url(r'^logout/$', auth_views.LogoutView.as_view(next_page='/')),
+
+
+    url(r'^client/create/$', ClientCreateView.as_view(), name='clientcreate'),
+    url(r'^client/list$', ClientListView.as_view(), name='clientlist'),
     url(r'^client/(?P<slug>[-\w]+)/$', ClientDetailView.as_view(), name='client'),
-    url(r'^update/(?P<slug>[-\w]+)/$', ClientUpdateView.as_view(), name='clientupdate'),
-    url(r'^create/$', ClientCreateView.as_view(), name='clientcreate'),
-    url(r'^delete/(?P<slug>[-\w]+)/$', ClientDeleteView.as_view(), name='clientdelete'),
+    url(r'^client/(?P<slug>[-\w]+)/update/$', ClientUpdateView.as_view(), name='clientupdate'),
+    url(r'^client/(?P<slug>[-\w]+)/delete/$', ClientDeleteView.as_view(), name='clientdelete'),
+
+    url(r'^produit/create/$', ProduitCreateView.as_view(), name='produitcreate'),
+    url(r'^produit/list$', ProduitListView.as_view(), name='produitlist'),
+    url(r'^produit/(?P<pk>[\d]+)/$', ProduitDetailView.as_view(), name='produit'),
+    url(r'^produit/(?P<pk>[\d]+)/update/$', ProduitUpdateView.as_view(), name='produitupdate'),
+    url(r'^produit/(?P<pk>[-\w]+)/delete/$', ProduitDeleteView.as_view(), name='produitdelete'),
+
+
     url(r'^$', IndexView.as_view(), name='index'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

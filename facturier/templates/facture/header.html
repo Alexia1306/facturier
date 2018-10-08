@@ -1,9 +1,10 @@
 {% load static %}
-<!DOCTYPE html>
 {% block content %}
 <nav class="navbar justify-content-between">
     <a class="navbar-brand" href="{% url 'index' %}">Menu</a>
     <a href="/admin">Espace administrateur</a>
+    <a href="{% url 'clientlist' %}">Liste des clients</a>
+    <a href="{% url 'produitlist' %}">Liste des produits</a>
     <ul>
         <li>{%if request.user.is_authenticated%}
             <a class="nav-link" href="#">Bonjour {{request.user.username}}</a>
@@ -14,8 +15,4 @@
         </li>
     </ul>
 </nav>
-
-
-
-
 {% endblock %}

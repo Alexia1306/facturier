@@ -5,13 +5,13 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.contrib.auth.models import User
-from django.urls import reverse
-from django.urls import reverse_lazy
-from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView, TemplateView
+from django.db.models import Q
 from .models import Client, Produit, Devis, Ligne
 
-class IndexView(ListView):
-    model = Client
+class IndexView(TemplateView):
+    template_name = "facture/index.html"
 
 
 class ClientDeleteView(DeleteView):
@@ -20,6 +20,18 @@ class ClientDeleteView(DeleteView):
 
 class ClientDetailView(DetailView):
     model = Client
+
+
+class ClientListView(ListView):
+    model = Client
+    template_name = 'facture/listing_client.html'
+
+    def get_queryset(self):
+       query =self.request.GET.get('q', None)
+       if query != None:
+           return Client.objects.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
+       else:
+           return Client.objects.all()
 
 class ClientUpdateView(UpdateView):
     model = Client
@@ -37,23 +49,36 @@ class ClientCreateView(CreateView):
     def get_success_url(self):
         return reverse('client', args=[self.object.slug])
 
-class UserDetailView(DetailView):
-    model = User
-    slug_url_kwarg = 'username'
-    slug_field = 'username'
+class ProduitCreateView(CreateView):
+    model = Produit
+    fields =  "__all__"
+    template_name = 'facture/produit_create.html'
+    success_url = reverse_lazy("produitlist")
 
 
 class ProduitDetailView(DetailView):
     model = Produit
-    slug_url_kwarg = 'name'
-    slug_field = 'name'
 
-class DevisDetailView(DetailView):
-    model = Devis
-    slug_url_kwarg = 'facture'
-    slug_field = 'facture'
+class ProduitUpdateView(UpdateView):
+    model = Produit
+    fields = "__all__"
+    template_name = 'facture/produit_update.html'
 
-class LigneDetailView(DetailView):
-    model = Ligne
-    slug_url_kwarg = 'produit'
-    slug_field = 'produit'
+    def get_success_url(self):
+        return reverse('produit', args=[self.object.id])
+
+class ProduitDeleteView(DeleteView):
+    model = Produit
+    template_name = 'facture/produit_confirm_delete.html'
+    success_url = reverse_lazy("produitlist")
+
+class ProduitListView(ListView):
+    model = Produit
+    template_name = 'facture/listing_produit.html'
+
+    def get_queryset(self):
+       query =self.request.GET.get('q', None)
+       if query != None:
+           return Produit.objects.filter(Q(name__icontains=query) | Q(reference__icontains=query))
+       else:
+           return Produit.objects.all()

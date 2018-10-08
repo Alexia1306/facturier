@@ -80,7 +80,7 @@ DATABASES = {
       'ENGINE': 'django.contrib.gis.db.backends.postgis',
       'NAME': 'facturier',
       'USER': 'facturier',
-      'PASSWORD': 'Ml12041998',
+      'PASSWORD': 'teamo1306',
   }
 }
 

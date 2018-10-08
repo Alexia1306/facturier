@@ -1,0 +1,13 @@
+{% extends 'facture/index.html'%}
+{% load static %}
+{% block content %}
+<div class="card w-50">
+  <div class="card-body">
+    <h5 class="card-title">{{ produit.name }} - {{produit.reference}}</h5>
+    <p class="card-text">{{ produit.description }}</p>
+    <p class="card-text">{{ produit.price }}€</p>
+    <a href="{% url 'produitupdate' produit.id %}" class="btn btn-primary">Button</a>
+    <a href="{% url 'produitdelete' produit.id %}" class="btn btn-primary">Delete</a>
+  </div>
+</div>
+{% endblock %}
