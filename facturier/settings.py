@@ -75,15 +75,6 @@ WSGI_APPLICATION = 'facturier.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-  'default': {
-      'ENGINE': 'django.contrib.gis.db.backends.postgis',
-      'NAME': 'facturier',
-      'USER': 'facturier',
-      'PASSWORD': 'teamo1306',
-  }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -132,3 +123,5 @@ STATICFILES_DIRS = [
 
 LOGIN_URL = "/login"
 LOGOUT_URL = "/logout"
+
+import extra_settings
