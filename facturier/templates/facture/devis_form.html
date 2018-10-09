@@ -3,13 +3,35 @@
 {% block content %}
 <form method="post">{% csrf_token %}
     {{ form.as_p }}
-    {% for formset in inlines %}
-        {{ formset.management_form }}
-        {% for form in formset %}
-        {{form.quantity}}
-        {{form.produit}}
-        {% endfor %}
-    {% endfor %}
-    <input type="submit" value="Save">
+    <table id="id_orders_table" border="0" cellpadding="0" cellspacing="5">
+        <thead>
+            <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for formset in inlines %}
+            {% for form in formset %}
+
+            <tr id="{{ form.prefix }}-row">
+                <td>
+
+                    {% for fld in form.hidden_fields %}{{ fld }}{% endfor %}
+                    {{form.produit}}
+
+                </td>
+                <td class="quant">{{ form.quantity }}</td>
+            </tr>
+                {{ inlines.management_form }}
+                {{ formset.management_form }}
+                {{ form.management_form }}
+                {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>
+            <input type="submit" value="Save">
+        </p>
 </form>
 {% endblock %}

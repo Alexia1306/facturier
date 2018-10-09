@@ -102,3 +102,15 @@ class DevisCreateView(CreateWithInlinesView):
 
     def get_success_url(self):
         return "/"
+
+class DevisListView(ListView):
+    model = Devis
+    template_name = 'facture/listing_devis.html'
+
+    def get_queryset(self):
+        q = self.request.GET.get('q', None)
+        if q != None:
+           queryset = Devis.objects.filter(client__last_name__icontains = q)
+           return queryset
+        else:
+           return Devis.objects.all()
