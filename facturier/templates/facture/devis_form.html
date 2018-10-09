@@ -1,0 +1,15 @@
+{% extends 'facture/index.html'%}
+{% load static %}
+{% block content %}
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    {% for formset in inlines %}
+        {{ formset.management_form }}
+        {% for form in formset %}
+        {{form.quantity}}
+        {{form.produit}}
+        {% endfor %}
+    {% endfor %}
+    <input type="submit" value="Save">
+</form>
+{% endblock %}

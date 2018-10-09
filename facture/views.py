@@ -6,6 +6,8 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.contrib.auth.models import User
 from django.urls import reverse, reverse_lazy
+from extra_views import CreateWithInlinesView, UpdateWithInlinesView, InlineFormSet
+from extra_views.generic import GenericInlineFormSet
 from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView, TemplateView
 from django.db.models import Q
 from .models import Client, Produit, Devis, Ligne
@@ -82,3 +84,21 @@ class ProduitListView(ListView):
            return Produit.objects.filter(Q(name__icontains=query) | Q(reference__icontains=query))
        else:
            return Produit.objects.all()
+
+
+class ProduitInline(InlineFormSet):
+    model = Produit
+
+
+class LigneInline(InlineFormSet):
+    model = Ligne
+    fields = "__all__"
+
+
+class DevisCreateView(CreateWithInlinesView):
+    model = Devis
+    inlines = [LigneInline, ]
+    fields = "__all__"
+
+    def get_success_url(self):
+        return "/"

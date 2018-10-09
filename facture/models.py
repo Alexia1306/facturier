@@ -37,12 +37,9 @@ class Devis(models.Model):
         verbose_name_plural="Devis"
 
     def __str__(self):
-        return "%s %s %s" % (self.client, self.produit)
+        return "%s" % (self.client)
 
 class Ligne(models.Model):
     quantity = models.IntegerField()
     produit = models.ForeignKey(Produit, null=True, blank=True)
     facture = models.ForeignKey(Devis, null=True, blank=True)
-
-    def __unicode__(self):
-        return self.label
