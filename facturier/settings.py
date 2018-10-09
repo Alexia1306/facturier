@@ -124,4 +124,4 @@ STATICFILES_DIRS = [
 LOGIN_URL = "/login"
 LOGOUT_URL = "/logout"
 
-import extra_settings
+from extra_settings import *
