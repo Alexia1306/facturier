@@ -1,0 +1,27 @@
+{% extends 'facture/index.html'%}
+{% load static %}
+{% block content %}
+<div class="card">
+  <div class="card-body">
+     <h1 class="card-title"> {{ devis.client }}</h1>
+     <p>C'est une facture? - {{ devis.facture }}</p>
+     <ul>
+         {% for ligne in ligne %}
+         {% if ligne.facture == devis %}
+
+         <li>
+             <p> {{ ligne.quantity }} - {{ ligne.produit }}</p>
+         </li>
+         <li>
+             <p>{{ ligne.produit.price }}€</p>
+         </li>
+
+
+         {% endif %}
+         {% endfor %}
+     </ul>
+  </div>
+</div>
+
+
+{% endblock %}

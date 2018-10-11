@@ -5,15 +5,15 @@
     <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search" name="q">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
 </form>
-<div class="card w-50">
+{% for produit in  object_list %}
+<div class="card">
   <div class="card-body">
-     {% for produit in  object_list %}
      <h5 class="card-title">{{ produit.name }} - {{produit.reference}}</h5>
      <p class="card-text">{{ produit.description }}</p>
      <p class="card-text">{{ produit.price }}€</p>
      <a href="{% url 'produitupdate' produit.id %}" class="btn btn-primary">Button</a>
      <a href="{% url 'produitdelete' produit.id %}" class="btn btn-primary">Delete</a>
-    {% endfor %}
   </div>
 </div>
+{% endfor %}
 {% endblock %}

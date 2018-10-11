@@ -109,8 +109,21 @@ class DevisListView(ListView):
 
     def get_queryset(self):
         q = self.request.GET.get('q', None)
+        t = self.request.GET.get('t', None)
         if q != None:
-           queryset = Devis.objects.filter(client__last_name__icontains = q)
-           return queryset
+            if t is not None:
+                return Devis.objects.filter(client__last_name__icontains=q, etat__icontains=t)
+            return Devis.objects.filter(client__last_name__icontains=q)
         else:
-           return Devis.objects.all()
+            if t != None:
+                return Devis.objects.filter(etat__icontains = t)
+            return Devis.objects.all()
+
+class DevisDetailView(DetailView):
+    model = Devis
+    template_name = 'facture/devis_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DevisDetailView, self).get_context_data(**kwargs)
+        context['ligne'] = Ligne.objects.all()
+        return context

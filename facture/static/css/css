@@ -1,5 +1,5 @@
 /*
-Errno::ENOTDIR: Not a directory @ rb_sysopen - css/scss
+Errno::ENOENT: No such file or directory @ rb_sysopen - css/scss
 
 Backtrace:
 /usr/lib/ruby/vendor_ruby/sass/plugin/compiler.rb:484:in `read'
@@ -18,4 +18,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Errno::ENOTDIR: Not a directory @ rb_sysopen - css/scss"; }
+  content: "Errno::ENOENT: No such file or directory @ rb_sysopen - css/scss"; }

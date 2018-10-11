@@ -1,0 +1,28 @@
+.card {
+    border: none;
+    text-align: center;
+    
+    .card-body {
+        display: grid;
+        grid-template-columns: 1fr;
+        background-color: #666666;
+        color: white;
+        width: 100%;
+        margin-top: 1rem;
+
+        .btn-primary {
+            margin: 1rem;
+        }
+
+        h1 {
+            color: rgb(20, 157, 153);
+            font-size: 2rem;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+    }
+}

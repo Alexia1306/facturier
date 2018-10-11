@@ -30,14 +30,26 @@ class Produit(models.Model):
     class Meta:
         ordering = ('name', 'description', 'price')
 
+
+ETAT_CHOICES = (
+("REVIVE", "A relancer"),
+("PAID", "Payer"),
+("WAITING", "En attente"),
+)
+
 class Devis(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     facture = models.BooleanField(default=False)
+    etat = models.CharField(choices=ETAT_CHOICES, default="WAITING", max_length=20)
+
     class Meta:
         verbose_name_plural="Devis"
 
     def __str__(self):
         return "%s" % (self.client)
+
+    # def total(self):
+    #     return self.price * self.quantity
 
 class Ligne(models.Model):
     quantity = models.IntegerField()
