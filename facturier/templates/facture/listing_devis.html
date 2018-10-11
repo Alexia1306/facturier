@@ -1,18 +1,29 @@
 {% extends 'facture/index.html'%}
 {% load static %}
 {% block content %}
+<label>Rechercher par Nom</label>
 <form class="form-inline my-2 my-lg-0" action="{% url 'devislist' %}" method="get">
     <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search" name="q">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
 </form>
-<div class="card">
+<label>Rechercher par l'état de la facture</label>
+<form class="form-inline my-2 my-lg-0" action="{% url 'devislist' %}" method="get">
+    <select class="tags" name="t">
+        <option>-----</option>
+        <option value="WAITING">En attente</option>
+        <option value="REVIVE">Relancer</option>
+        <option value="PAID">Payer</option>
+    </select>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+</form>
+<div class="card w-50">
   <div class="card-body">
      {% for devis in  object_list %}
-     <h5 class="card-title">{{ devis.client }} - {{devis.facture}}</h5>
-     <p class="card-text"></p>
-     <p class="card-text"></p>
+     <h5 class="card-title">nom du client : {{ devis.client }}</h5>
+     <p class="card-text"> id du devis : {{ devis.id }}</p>
+     <p class="card-text">Es-ce une facture ? {{devis.facture}}</p>
+     <p class="card-text">Etat de la facture : {{devis.etat}}</p>
      {# <a href="{% url 'produitupdate' produit.id %}" class="btn btn-primary">Button</a> #}
-     {# <a href="{% url 'produitdelete' produit.id %}" class="btn btn-primary">Delete</a> #}
     {% endfor %}
   </div>
 </div>
