@@ -95,6 +95,7 @@ class LigneInline(InlineFormSet):
     fields = "__all__"
 
 
+
 class DevisCreateView(CreateWithInlinesView):
     model = Devis
     inlines = [LigneInline, ]

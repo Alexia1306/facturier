@@ -55,3 +55,6 @@ class Ligne(models.Model):
     quantity = models.IntegerField()
     produit = models.ForeignKey(Produit, null=True, blank=True)
     facture = models.ForeignKey(Devis, null=True, blank=True)
+
+    def sous_totaux(self):
+       return self.produit.price * self.quantity

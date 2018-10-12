@@ -13,12 +13,14 @@
              <p> {{ ligne.quantity }} - {{ ligne.produit }}</p>
          </li>
          <li>
-             <p>{{ ligne.produit.price }}€</p>
+             <p>Prix:</p>
+             <p class="totaux">{{ligne.sous_totaux}}€</p>
          </li>
-
-
          {% endif %}
          {% endfor %}
+         <li class="resultat">
+             Total :{{ligne.resultat}}
+         </li>
      </ul>
   </div>
 </div>
