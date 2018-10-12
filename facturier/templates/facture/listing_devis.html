@@ -16,15 +16,15 @@
     </select>
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
 </form>
+{% for devis in  object_list %}
 <div class="card">
   <div class="card-body">
-     {% for devis in  object_list %}
      <h5 class="card-title">nom du client : {{ devis.client }}</h5>
      <p class="card-text"> id du devis : {{ devis.id }}</p>
      <p class="card-text">Es-ce une facture ? {{devis.facture}}</p>
      <p class="card-text">Etat de la facture : {{devis.etat}}</p>
      {# <a href="{% url 'produitupdate' produit.id %}" class="btn btn-primary">Button</a> #}
-    {% endfor %}
   </div>
 </div>
+{% endfor %}
 {% endblock %}

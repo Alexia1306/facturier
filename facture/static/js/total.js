@@ -1,9 +1,23 @@
 $(document).ready(function () {
-    var $resultat = $(".resultat");
-    var $resultat =0;
+    // var $resultat = $(".resultat");
+    // var $result =0;
 
-    $.each($resultat, function(index, value){
-        $resultat = $resultat + parseInt(value.innerText);
+    // $.each($resultat, function(index, value){
+    //     $result = $result + parseInt(value.innerText);
+    // });
+    // $(".result").html($result);
+
+    var array = [];
+    $('.totaux').each(function(){
+        array.push($(this).text());
     });
-    $(".resultat").html($resultat);
+
+    console.log(array);
+    var sum = 0;
+    for (var i = 0; i < array.length; i++) {
+        var number = parseInt(array[i]);
+        sum += number;
+    }
+
+    $('.sum').append(sum);
 });
