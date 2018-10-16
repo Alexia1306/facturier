@@ -5,6 +5,8 @@
     <a href="/admin">Espace administrateur</a>
     <a href="{% url 'clientlist' %}">Liste des clients</a>
     <a href="{% url 'produitlist' %}">Liste des produits</a>
+    <a href="{% url 'devislist' %}">Liste des devis</a>
+
     <ul>
         <li>{%if request.user.is_authenticated%}
             <a class="nav-link" href="#">Bonjour {{request.user.username}}</a>

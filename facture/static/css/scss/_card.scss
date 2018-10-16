@@ -1,12 +1,14 @@
 .card {
     border: none;
     text-align: center;
-    
+    background-color: rgb(200, 200, 200);
+    padding: 2rem;
+    margin: 2rem;
+
     .card-body {
         display: grid;
         grid-template-columns: 1fr;
-        background-color: #666666;
-        color: white;
+        color: black;
         width: 100%;
         margin-top: 1rem;
 

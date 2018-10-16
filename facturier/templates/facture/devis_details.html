@@ -2,27 +2,35 @@
 {% load static %}
 {% block content %}
 <div class="card">
-  <div class="card-body">
-     <h1 class="card-title"> {{ devis.client }}</h1>
-     <p>C'est une facture? - {{ devis.facture }}</p>
-     <ul>
-         {% for ligne in ligne %}
-         {% if ligne.facture == devis %}
+    <div class="card-body">
+        <form class="info" action="index.html" method="post">
 
-         <li>
-             <p> {{ ligne.quantity }} - {{ ligne.produit }}</p>
-         </li>
-         <li>
-             <p>Prix:</p>
-             <p class="totaux">{{ligne.sous_totaux}}€</p>
-         </li>
-         {% endif %}
-         {% endfor %}
-         Total :
-         <li class="sum">
-         </li>
-     </ul>
-  </div>
+            <h1 class="card-title"> {{ devis.client }}</h1>
+            <p>C'est une facture? - {{ devis.facture }}</p>
+            <a href="#" id="facture" data-type="select" data-pk="{{ devis.pk }}" data-url="{% url 'devis_edit' 'facture' %}" data-title="saisir etat">{{ devis.facture }}</a>
+
+            <p>commentaire:</p>
+            <a href="#" id="commentaire" data-type="textarea" data-pk="{{ devis.pk }}" data-url="{% url 'devis_edit' 'commentaire' %}" data-title="Saisir commentaire">{{ devis.commentaire }}</a>
+
+            <p>changer etat:</p>
+            <a href="#" id="etat" data-type="select" data-pk="{{ devis.pk }}" data-url="{% url 'devis_edit' 'etat' %}" data-title="saisir etat">{{ devis.etat }}</a>
+
+            <ul>
+                {% for ligne in devis.ligne_set.all %}
+                <li>
+                    Produit:
+                    <a href="#" id="quantity" data-pk="{{ devis.id }}" data-url="{% url 'devis_ligne_edit'  ligne.id 'quantity' %}">{{ ligne.quantity }}</a>
+                     {{ ligne.produit }}
+                    Prix:
+                <span class="totaux">{{ligne.sous_totaux}}€</span>
+                </li>
+                {% endfor %}
+                Total :
+                <li class="sum">
+                    €</li>
+            </ul>
+        </form>
+    </div>
 </div>
 
 

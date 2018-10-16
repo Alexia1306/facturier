@@ -19,12 +19,56 @@
         margin: 0;
         padding: 0;
     }
-
-
 }
 
-    // 
-    // footer {
-    //     background-color: #666666;
-    //     height:500px;
-    // }
+.formcss {
+    background-color: rgb(200, 200, 200);
+    margin-top: 1rem;
+    text-align: center;
+    
+
+    .place {
+        margin: auto;
+
+        .form-inline {
+            margin: auto;
+        }
+    }
+}
+
+.form-control {
+    margin-bottom: 0.5rem;
+    background-color: white;
+    text-align: center;
+}
+
+.info {
+    border: 2px solid black;
+    text-align: inherit;
+}
+
+
+.background {
+    background-color: #827081;
+    padding: 2rem;
+    main {
+        max-width: 1280px;
+        margin: auto;
+
+
+    }
+}
+
+@media screen AND (min-width:720px) {
+    .navbar {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media screen AND (min-width:1020px) {
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        align-content: space-around;
+    }
+}

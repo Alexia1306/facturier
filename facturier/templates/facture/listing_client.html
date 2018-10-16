@@ -1,21 +1,26 @@
 {% extends 'facture/index.html'%}
 {% load static %}
 {% block content %}
+<div class="formcss">
 <label>Rechercher par Nom</label>
-<form class="form-inline my-2 my-lg-0" action="{% url 'devislist' %}" method="get">
-   <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search" name="q">
-   <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+<form class="form-inline" action="{% url 'devislist' %}" method="get">
+<div class="place">
+
+   <input class="form-control" type="search" placeholder="Recherche" aria-label="Search" name="q">
+   <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+</div>
 </form>
-<label>Rechercher par l'état de la facture</label>
-<form class="form-inline my-2 my-lg-0" action="{% url 'devislist' %}" method="get">
+<label> Rechercher par l'état de la facture</label>
+<form class="form-inline" action="{% url 'devislist' %}" method="get">
    <select class="tags" name="t">
        <option>-----</option>
        <option value="WAITING">En attente</option>
        <option value="REVIVE">Relancer</option>
        <option value="PAID">Payer</option>
    </select>
-   <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+   <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
 </form>
+</div>
 {% for devis in  object_list %}
 <div class="card">
  <div class="card-body">

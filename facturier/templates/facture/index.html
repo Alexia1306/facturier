@@ -6,22 +6,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatble" content="ie=edge">
         <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.css' %}">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> <!-- lien pour les i symbole -->
+        <link rel="stylesheet" href="{% static 'x-editable/dist/bootstrap-editable/css/bootstrap-editable.css'%}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 
     <title>Facturier</title>
     </head>
+
     <body>
-    {% include "facture/header.html" %}
+        <div class="background">
+
+        {% include "facture/header.html" %}
+    <main>
+
     {% block content %}{% endblock  %}
 
 
-    <!-- <footer></footer> -->
+
+    </main>
+</div>
     </body>
     <script src="{% static 'bootstrap/dist/js/bootstrap.js' %}"></script>
     <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'js/jquery.formset.js' %}"></script>
     <script src="{% static '/js/total.js'%}"></script>
+    <script src="{% static 'x-editable/dist/bootstrap-editable/js/bootstrap-editable.min.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static '/js/scriptform.js' %}"></script>
+    <script src="{% static '/js/editable.js' %}" charset="utf-8"></script>
 </html>

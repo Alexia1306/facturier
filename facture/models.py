@@ -41,6 +41,7 @@ class Devis(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     facture = models.BooleanField(default=False)
     etat = models.CharField(choices=ETAT_CHOICES, default="WAITING", max_length=20)
+    commentaire = models.TextField(blank=True, null=True)
 
     class Meta:
         verbose_name_plural="Devis"

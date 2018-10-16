@@ -4,11 +4,14 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse, reverse_lazy
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView, InlineFormSet
 from extra_views.generic import GenericInlineFormSet
-from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView, TemplateView
+from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView, TemplateView, View
 from django.db.models import Q
 from .models import Client, Produit, Devis, Ligne
 
@@ -128,3 +131,26 @@ class DevisDetailView(DetailView):
         context = super(DevisDetailView, self).get_context_data(**kwargs)
         context['ligne'] = Ligne.objects.all()
         return context
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class DevisEditView(View):
+
+    def post(self, request, field_name, **kwargs):
+        devis = Devis.objects.get(pk=request.POST.get("pk"))
+        setattr(devis, field_name, request.POST.get("value"))
+        devis.save()
+        return HttpResponse({"success":True})
+
+
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class DevisLineEditView(View):
+
+    def post(self, request, pk, field_name, **kwargs):
+        ligne = Ligne.objects.get(id=pk)
+        setattr(ligne, field_name, request.POST.get("value"))
+        ligne.save()
+        print ligne.quantity
+        return HttpResponse({"success":True})
