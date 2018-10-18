@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from facture.views import IndexView, ClientDetailView, ClientUpdateView, ClientCreateView, ClientDeleteView, ClientListView
 from facture.views import ProduitCreateView, ProduitDetailView, ProduitUpdateView, ProduitDeleteView, ProduitListView
-from facture.views import DevisCreateView, DevisListView, DevisDetailView, DevisEditView, DevisLineEditView
+from facture.views import DevisCreateView, DevisListView, DevisDetailView, DevisEditView,  DevisLineEditView, DevisLineDeleteView, DevisLineAddView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -40,6 +40,8 @@ urlpatterns = [
     url(r'^produit/(?P<pk>[-\w]+)/delete/$', ProduitDeleteView.as_view(), name='produitdelete'),
 
 
+    url(r'^devis/ligne/delete/$', DevisLineDeleteView.as_view(), name='devis_ligne_delete'),
+    url(r'^devis/ligne/add/$', DevisLineAddView.as_view(), name='devis_ligne_add'),
     url(r'^devis/create/$', DevisCreateView.as_view(), name='deviscreate'),
     url(r'^devis/list$', DevisListView.as_view(), name='devislist'),
     url(r'^devis/(?P<pk>[\w]+)/$', DevisDetailView.as_view(), name='devis'),

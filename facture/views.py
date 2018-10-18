@@ -154,3 +154,22 @@ class DevisLineEditView(View):
         ligne.save()
         print ligne.quantity
         return HttpResponse({"success":True})
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class DevisLineDeleteView(DeleteView):
+
+    def post(self, request, **kwargs):
+        ligne = Ligne.objects.get(pk=request.POST.get("pk"))
+        ligne.delete()
+        return HttpResponse({"success":True})
+
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class DevisLineAddView(View):
+
+    def post(self, request, **kwargs):
+        ligne = Ligne.object.get(pk=request.POST.get("pk"))
+        ligne.add()
+        return HttpResponse({"success":True})

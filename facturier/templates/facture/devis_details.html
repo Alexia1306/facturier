@@ -3,9 +3,11 @@
 {% block content %}
 <div class="card">
     <div class="card-body">
-        <form class="info" action="index.html" method="post">
+        <div class="info">
 
             <h1 class="card-title"> {{ devis.client }}</h1>
+
+
             <p>C'est une facture? - {{ devis.facture }}</p>
             <a href="#" id="facture" data-type="select" data-pk="{{ devis.pk }}" data-url="{% url 'devis_edit' 'facture' %}" data-title="saisir etat">{{ devis.facture }}</a>
 
@@ -15,23 +17,60 @@
             <p>changer etat:</p>
             <a href="#" id="etat" data-type="select" data-pk="{{ devis.pk }}" data-url="{% url 'devis_edit' 'etat' %}" data-title="saisir etat">{{ devis.etat }}</a>
 
-            <ul>
+            <ul class="inner">
                 {% for ligne in devis.ligne_set.all %}
                 <li>
                     Produit:
-                    <a href="#" id="quantity" data-pk="{{ devis.id }}" data-url="{% url 'devis_ligne_edit'  ligne.id 'quantity' %}">{{ ligne.quantity }}</a>
+                    <a href="#" class="editable" data-pk="{{ devis.id }}" data-url="{% url 'devis_ligne_edit'  ligne.id 'quantity' %}">{{ ligne.quantity }}</a></td>
                      {{ ligne.produit }}
                     Prix:
                 <span class="totaux">{{ligne.sous_totaux}}€</span>
+                <button type="submit" id="{{ligne.id}}" class="delete">supp</button>
+                <button type="submit" id="{{ligne.id}}" class="add">add</button>
                 </li>
+
                 {% endfor %}
                 Total :
                 <li class="sum">
                     €</li>
             </ul>
-        </form>
+        </div>
     </div>
 </div>
 
+<script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
 
+<script>
+$('.delete').click(function(){
+    $li = $(this).closest("li");
+        $li.remove();
+
+
+    $.ajax({
+        type: 'POST',
+        url: "{% url 'devis_ligne_delete' %}",
+        data: 'pk=' + this.id,
+        success: function () {
+        alert('Line delete!')
+
+        }
+    })
+});
+
+$('.add').click(function(){
+    $( ".inner" ).append( "<li>li en plus</li>" );
+
+
+    $.ajax({
+        type: 'POST',
+        Url: "{% url 'devis_ligne_add' %}",
+        data: 'pk=' + this.id,
+        success: function () {
+            alert('Line add')
+        }
+    })
+
+});
+
+</script>
 {% endblock %}

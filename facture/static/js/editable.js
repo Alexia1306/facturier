@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $.fn.editable.defaults.mode = 'inline';
+    $('.editable').editable();
     $('#commentaire').editable();
     $('#quantity').editable();
     $('#etat').editable({
